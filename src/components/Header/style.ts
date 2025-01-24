@@ -4,7 +4,7 @@ import { CaretLeft } from "phosphor-react-native"
 export const Container = styled.View`
     width: 100%;
 
-    margin-top: 45px;
+    /* margin-top: 45px; */
 
     flex-direction: row;
     align-items: center;
