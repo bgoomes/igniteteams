@@ -7,9 +7,17 @@ import { Container } from './styles';
 import { ListEmpty } from '../../components/ListEmpty';
 import { Button } from '../../components/Button';
 
-export function Groups() {
+import { useNavigation } from '@react-navigation/native';
 
+export function Groups() {
   const [ groups, setGroups ] = useState<string[]>([])
+  const navigation = useNavigation()
+
+
+  function handleNewGroup(){
+    navigation.navigate('new') 
+  }
+
   return (
     <Container>
       <Header />
@@ -27,6 +35,7 @@ export function Groups() {
         ListEmptyComponent={() => <ListEmpty message='Que tal cadastrar a primeira turma?'/>}
       />
       <Button 
+        onPress={handleNewGroup}
         title='Criar nova turma'
       />
     </Container>
