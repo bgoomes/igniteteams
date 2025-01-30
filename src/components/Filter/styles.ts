@@ -12,10 +12,11 @@ ${({theme, isActive}: any) => isActive && css`
 
     border-radius: 4px;
     margin-right: 12px;
+    padding: 2px;
 
 
     height: 38px;
-    width: 70px;
+    min-width: 70px;
 
     align-items: center;
     justify-content: center;
