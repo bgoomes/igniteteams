@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { GroupCard } from '../../components/GroupCard';
 import { Header } from '../../components/Header';
@@ -8,6 +8,7 @@ import { ListEmpty } from '../../components/ListEmpty';
 import { Button } from '../../components/Button';
 
 import { useNavigation } from '@react-navigation/native';
+import { groupGetAll } from '../../storage/group/groupGetAll';
 
 export function Groups() {
   const [ groups, setGroups ] = useState<string[]>([])
@@ -17,6 +18,22 @@ export function Groups() {
   function handleNewGroup(){
     navigation.navigate('new') 
   }
+  async function fetchGroups() {
+    try {
+      const data = await groupGetAll()
+      setGroups(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function handleOpenGroupe(group: string){
+    navigation.navigate('players', {group})
+  }
+
+  useEffect(() => {
+    fetchGroups()
+  },[])
 
   return (
     <Container>
@@ -28,7 +45,8 @@ export function Groups() {
         keyExtractor={item => item}
         renderItem={({item}) => (
           <GroupCard 
-            title={item} 
+            title={item}
+            onPress={() => handleOpenGroupe(item)}
           /> 
         )}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
